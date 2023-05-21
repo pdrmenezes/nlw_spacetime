@@ -19,11 +19,11 @@ export default function Home() {
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-spacetime_gray-400">
             <User className="h-5 w-5 text-spacetime_gray-500" />
-            <p className="max-w-[140px] text-sm leading-snug">
-              <span className="underline">Crie sua conta</span> e salve suas
-              memórias!
-            </p>
           </div>
+          <p className="max-w-[140px] text-sm leading-snug">
+            <span className="underline">Crie sua conta</span> e salve suas
+            memórias!
+          </p>
         </Link>
         {/* hero */}
         <div className="space-y-5">

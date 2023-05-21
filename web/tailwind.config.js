@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: 'var(--spaceGrotesk)',
+        sans: 'var(--font-spaceGrotesk)',
       },
       colors: {
         spacetime_gray: {
