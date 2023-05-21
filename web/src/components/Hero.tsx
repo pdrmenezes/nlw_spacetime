@@ -16,7 +16,7 @@ export function Hero() {
         </p>
       </div>
       <Link
-        href=""
+        href="/memories/new"
         className="inline-block rounded-full bg-spacetime_green-500 px-5 py-3 text-sm uppercase leading-none text-black hover:bg-spacetime_green-600"
       >
         Cadastrar Lembrança
