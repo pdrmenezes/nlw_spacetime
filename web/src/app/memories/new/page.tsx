@@ -1,3 +1,4 @@
+import { MediaPicker } from "@/components/MediaPicker";
 import { Camera, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -13,7 +14,6 @@ export default function NewMemory() {
       </Link>
       <form action="" className="flex flex-1 flex-col gap-2">
         <div className="flex items-center gap-4">
-          {/* como o input type="file" é feio, podemos usar um hack pra criar uma label pro input, vinculá-los pelo id, depois ocultar o input e estilizar a label, assim ao clicar na label, obtem-se o mesmo comportamento de clicar no input */}
           <label
             htmlFor="media"
             className="flex cursor-pointer items-center gap-1.5 text-sm text-spacetime_gray-200 hover:text-spacetime_gray-100"
@@ -21,6 +21,7 @@ export default function NewMemory() {
             <Camera className="h-4 w-4" />
             Anexar mídia
           </label>
+          <MediaPicker />
           <label
             htmlFor="isPublic"
             className="flex items-center gap-1.5 text-sm text-spacetime_gray-200 hover:text-spacetime_gray-100"
@@ -35,7 +36,6 @@ export default function NewMemory() {
             Tornar memória pública
           </label>
         </div>
-        <input type="file" id="media" className="invisible h-0 w-0" />
         <textarea
           name="content"
           spellCheck={false}

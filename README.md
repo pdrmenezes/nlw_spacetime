@@ -5,6 +5,7 @@ Back-end
 - Fastify (framework)
 - ESLint
 - Prisma + SQLite
+- Autenticação com OAuth do Github
 
 Front-end
 
