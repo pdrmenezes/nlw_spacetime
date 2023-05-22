@@ -6,6 +6,8 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import * as SecureStore from "expo-secure-store";
+import { api } from "../src/lib/api";
 
 export default function NewMemory() {
   const { bottom, top } = useSafeAreaInsets();
@@ -19,7 +21,7 @@ export default function NewMemory() {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         quality: 1,
       });
-      if (result.assets[0]) {
+      if (!result.canceled) {
         setPreview(result.assets[0].uri);
       }
     } catch (err) {
@@ -27,7 +29,22 @@ export default function NewMemory() {
     }
   }
 
-  function handleCreateMemory() {}
+  async function handleCreateMemory() {
+    const token = await SecureStore.getItemAsync("token");
+
+    let coverUrl = "";
+    if (preview) {
+      const uploadFormData = new FormData();
+      uploadFormData.append("file", {
+        name: "image.jpg",
+        type: "image/jpeg",
+        uri: preview,
+      } as any);
+
+      const uploadResponse = await api.post("/upload", uploadFormData);
+      coverUrl = uploadResponse.data.fileUrl;
+    }
+  }
 
   return (
     <ScrollView
@@ -56,6 +73,7 @@ export default function NewMemory() {
         </View>
         <TouchableOpacity
           activeOpacity={0.7}
+          onPress={openMediaPicker}
           className="h-32 items-center justify-center rounded-lg border-dashed border-spacetime_gray-500 bg-black/20"
         >
           {preview ? (
