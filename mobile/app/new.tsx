@@ -1,7 +1,7 @@
 import { Image, ScrollView, Switch, Text, View } from "react-native";
 import Icon from "@expo/vector-icons/Feather";
 import NlwLogo from "../src/assets/nlw-spacetime-logo.svg";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useState } from "react";
@@ -11,6 +11,7 @@ import { api } from "../src/lib/api";
 
 export default function NewMemory() {
   const { bottom, top } = useSafeAreaInsets();
+  const router = useRouter();
   const [preview, setPreview] = useState<string | null>(null);
   const [content, setContent] = useState("");
   const [isPublic, setIsPublic] = useState(false);
@@ -37,13 +38,31 @@ export default function NewMemory() {
       const uploadFormData = new FormData();
       uploadFormData.append("file", {
         name: "image.jpg",
-        type: "image/jpeg",
+        type: "image/jpg",
         uri: preview,
       } as any);
 
-      const uploadResponse = await api.post("/upload", uploadFormData);
+      const uploadResponse = await api.post("/upload", uploadFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       coverUrl = uploadResponse.data.fileUrl;
     }
+    await api.post(
+      "/memories",
+      {
+        content,
+        isPublic,
+        coverUrl,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    router.push("/memories");
   }
 
   return (

@@ -23,20 +23,13 @@ const discovery = {
 
 export default function App() {
   const router = useRouter();
-  const [fontsHaveLoaded] = useFonts({
-    SpaceGrotesk_300Light,
-    SpaceGrotesk_400Regular,
-    SpaceGrotesk_500Medium,
-    SpaceGrotesk_600SemiBold,
-    SpaceGrotesk_700Bold,
-  });
 
   const [request, response, signInWithGithub] = useAuthRequest(
     {
       clientId: "646a8ecbc8128bbf5c5d",
       scopes: ["identity"],
       redirectUri: makeRedirectUri({
-        scheme: "nlw-spacetime",
+        scheme: "spacetime",
       }),
     },
     discovery
@@ -58,10 +51,8 @@ export default function App() {
     }
   }, [response]);
 
-  if (!fontsHaveLoaded) return null;
-
   return (
-    <View className="flex-1  px-8 py-10">
+    <View className="flex-1 items-center px-8 py-10">
       <View className="flex-1 items-center justify-center gap-6">
         <NlwLogo />
         <View className="space-y-2">
