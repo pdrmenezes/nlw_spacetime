@@ -113,11 +113,13 @@ export default function NewMemory() {
           multiline
           value={content}
           onChangeText={setContent}
+          textAlignVertical="top"
           className="p-0 font-body text-lg text-spacetime_gray-50"
           placeholderTextColor="#56565a"
           placeholder="Fique livre para adicionar fotos, vídeos e relatos sobre essa experiência que você quer lembrar para sempre."
         />
         <TouchableOpacity
+          onPress={handleCreateMemory}
           activeOpacity={0.7}
           className="bg-spacetime-green-500 items-center rounded-full px-5 py-3"
         >
